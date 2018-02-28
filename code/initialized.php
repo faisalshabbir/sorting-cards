@@ -7,7 +7,13 @@ error_reporting(E_ALL);
 /**
  * Introduce code library path.
  */
+// for *unix system this path will work fine 
+
 set_include_path(get_include_path() . ':' . __DIR__ . '/lib/');
+
+// for windows system this path will work fine
+//set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '\lib');
+
 
 //echo get_include_path(); exit(); to check the path
 
