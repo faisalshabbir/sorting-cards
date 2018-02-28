@@ -5,7 +5,12 @@
 ### Dependencies
 - PHP 7
 - Any kind of *nix OS
+- Default setiings is for *nix machine enviorment. 
+- For runing the script in windows machine, modify the path in initialized.php 
+- Comment out the *nix path and enable the windows path
 
+For linux machine path : set_include_path(get_include_path() . ':' . __DIR__ . '/lib/');
+For windows machine path : set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '\lib');
 
 ### Card Type Details
 * Default card type is TravelCard and default class is DefaultCard.
