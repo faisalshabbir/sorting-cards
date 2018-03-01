@@ -1,5 +1,4 @@
 # sorting-cards
-==============================================
 
 
 ### Dependencies
@@ -10,6 +9,7 @@
 - Comment out the *nix path and enable the windows path
 
 For linux machine path : set_include_path(get_include_path() . ':' . __DIR__ . '/lib/');
+
 For windows machine path : set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '\lib');
 
 ### Sorting Algorthim execution process
@@ -58,6 +58,7 @@ In second condition, current unordered array destination value is compared with 
     }
 
 In third condition, current unordered array key index is checked into temp array and if found then removed from temp array
+
     if (isset(self::$tmp[$key])) {
         unset(self::$tmp[$key]);
     }
@@ -65,6 +66,7 @@ In third condition, current unordered array key index is checked into temp array
 Note : Step 3, 4, 5 are done in a loop as mentioned in step 3. 
 
 Step 6 : If temp array count is greater than zero then sort function will called recursively.
+
     if (count(self::$tmp) > 0) {
         self::sort(self::$tmp);
     }
