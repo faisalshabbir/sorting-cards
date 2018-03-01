@@ -8,6 +8,7 @@
 
  use \boardingcards\utlity\sorters\ArraySort as CardSort;
  use \boardingcards\cards\BaseCard;
+ use \boardingcards\operations\display\DisplayCard;
  use \Exception;
 
 /**
@@ -66,51 +67,9 @@ class ProcessTravel {
    */
   public function __toString(){
     $cards = $this->getCards();
-    foreach($cards as $key => $card){      
-      $str = ($key+1).' : ';
-     if(strpos(strtolower($card->destination), 'airport') !== false && strpos(strtolower($card->source), 'airport') === false ){
-        $str .= "Take the airport ".$card->vehicle.", ";
-        $str .= !isset($card->vehicleNo) && $card->vehicleNo != '' ? $card->vehicleNo." " : "";
-        $str .= "from ".$card->source." to ".$card->destination.". ";
-        $str .= !isset($card->gate) && $card->gate != ''  ? "".$card->gate.", " : ""; 
-        $str .= !isset($card->seat) && $card->seat != '' ? "".$card->seat."" : "";
-      }else if(strpos(strtolower($card->destination), 'airport') === false && strpos(strtolower($card->source), 'airport') !== false ){
-        $str .= "From ".$card->source.", ";
-        $str .= "take ". $card->vehicle." ";
-        $str .= !isset($card->vehicleNo) && $card->vehicleNo != '' ? $card->vehicleNo." " : "";
-        $str .= "to ".$card->destination.". ";
-        $str .= !isset($card->gate) && $card->gate != ''  ? "Gate ".$card->gate.", " : ""; 
-        $str .= !isset($card->seat) && $card->seat != '' ? "seat ".$card->seat.". " : "";
-      }else if(strpos(strtolower($card->destination), 'airport') === false && strpos(strtolower($card->source), 'airport') === false ){
-        if(in_array(strtolower($card->vehicle),array('plane','flight'))){
-          $str .= "From ".$card->source.", ";
-          $str .= "take ". $card->vehicle." ";
-          $str .= !isset($card->vehicleNo) && $card->vehicleNo != '' ? $card->vehicleNo." " : "";
-          $str .= "to ".$card->destination.". ";
-          $str .= !isset($card->gate) && $card->gate != ''  ? "Gate ".$card->gate.", " : ""; 
-          $str .= !isset($card->seat) && $card->seat != '' ? "seat ".$card->seat.". " : "";
-        }else{
-          $str .= "Take ".$card->vehicle ." ";
-          $str .= !isset($card->vehicleNo) && $card->vehicleNo != '' ? $card->vehicleNo." " : "";
-          $str .= "from ".$card->source." to ".$card->destination.". ";
-          $str .= !isset($card->seat) && $card->seat != '' ? "Sit in seat ".$card->seat." " : "";
-          $str .= !isset($card->gate) && $card->gate != ''  ? "from the gate ".$card->gate."." : "";  
-        }  
-      }
-
-      if( !isset($card->baggage) && $card->baggage != '' ){
-        $str .= $card->baggage;
-      }
-
-      echo $str;
-      echo PHP_EOL;	
-
-      if ($key == count($this->cards) -1 ) {
-        echo 'You have arrived at your final destination.' . PHP_EOL;
-        break;
-      }
-
-    }
+    $displayCard = new DisplayCard($cards);
+    $displayCard->__toString();
+    
   }
 
 }
