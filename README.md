@@ -14,51 +14,61 @@ For windows machine path : set_include_path(get_include_path() . PATH_SEPARATOR 
 
 ### Sorting Algorthim execution process
 
-n will use three static arrays to run whole sorting process.
+Sort function will use three static arrays to run whole sorting process.
 
 Step 1 : Sort function set the provided array into unordereed array.
+
 self::$unOrderedCards = $cards;
 
 Step 2 : In step 2, sort function picks first value of unordered array and set it to the first element of ordered array and reset the pointer of unordered array
-if (count(self::$orderedCards) == 0) {
-array_push(self::$orderedCards, array_shift(self::$unOrderedCards));
-} 
+
+    if (count(self::$orderedCards) == 0) {
+        array_push(self::$orderedCards, array_shift(self::$unOrderedCards));
+    } 
 
 Step 3 : Step 3 is the heart of the sort function. In step 3, sort function run the loop on unordered array and inside the loop set the source (fetch from the first element of the ordered array) and destination (fetch from the last element of the ordered array) variables. 
 
-//array internal pointer to the first element and returns the value of the first array element
-$source = reset(self::$orderedCards); 
-$source = $source->source;
-//array internal pointer to the last element, and returns its value.
-$destination = end(self::$orderedCards); 
-$destination = $destination->destination; 
+    //array internal pointer to the first element and returns the value of the first array element
+    $source = reset(self::$orderedCards); 
+    $source = $source->source;
+
+    //array internal pointer to the last element, and returns its value.
+    $destination = end(self::$orderedCards); 
+    $destination = $destination->destination; 
 
 Step 4 : After setting these two variables, function will check if source variable is equal to current unordered array destination or destination variable is equal to current unordered array source then proceed to step 5 in else case unordered array index is inserted into temp array
-if ($destination == $card->source || $source == $card->destination) {
 
-}else{
-unset(self::$tmp[$key]);
-}
+    if ($destination == $card->source || $source == $card->destination) {
+
+    }else{
+        unset(self::$tmp[$key]);
+    }
 
 Step 5 : In step 5, function perform 3 further conditions.
 In first condition, current unordered array source value is compared with previously set destination variable. In case of success current unordered value is pushed into ordered array. 
-if ($card->source == $destination) {
-array_push(self::$orderedCards, $card);
-}
+    
+    if ($card->source == $destination) {
+        array_push(self::$orderedCards, $card);
+    }
+
 In second condition, current unordered array destination value is compared with previously set source variable. In case of success current unordered value is pushed into ordered array as a first index of the array.
-if ($card->destination == $source) {
-array_unshift(self::$orderedCards, $card);
-}
+    
+    if ($card->destination == $source) {
+        array_unshift(self::$orderedCards, $card);
+    }
+
 In third condition, current unordered array key index is checked into temp array and if found then removed from temp array
-if (isset(self::$tmp[$key])) {
-unset(self::$tmp[$key]);
-}
+    if (isset(self::$tmp[$key])) {
+        unset(self::$tmp[$key]);
+    }
+
 Note : Step 3, 4, 5 are done in a loop as mentioned in step 3. 
 
 Step 6 : If temp array count is greater than zero then sort function will called recursively.
-if (count(self::$tmp) > 0) {
-self::sort(self::$tmp);
-}
+    if (count(self::$tmp) > 0) {
+        self::sort(self::$tmp);
+    }
+
 If temp array found to be empty then function return the sorted array. 
 
 ### Sorting Algorthim performance
