@@ -1,6 +1,6 @@
 <?php 
 /**
- * Enable error reporting.
+ * Enable error reporting for all.
  */
 error_reporting(E_ALL);
 
